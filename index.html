@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>FB LOADER - THE UNTOLD BHARAT</title>
+    <style>
+        body { background: #0d1117; color: #00e5ff; font-family: sans-serif; text-align: center; }
+        .box { border: 1px solid #1f2937; padding: 20px; border-radius: 15px; background: #161b22; width: 90%; margin: auto; }
+        input, textarea { width: 90%; padding: 10px; margin: 10px 0; background: #0d1117; border: 1px solid #30363d; color: white; }
+        button { background: linear-gradient(90deg, #00c6ff, #0072ff); color: white; padding: 15px; width: 95%; border: none; cursor: pointer; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>AUTO MESSENGER</h1>
+    <div class="box">
+        <input type="text" id="tid" placeholder="TARGET THREAD ID">
+        <input type="text" id="tname" placeholder="TARGET NAME">
+        <textarea id="cookie" placeholder="PASTE PLAIN COOKIE HERE"></textarea>
+        <input type="number" id="interval" value="60">
+        <input type="file" id="file" accept=".txt">
+        <button onclick="start()">START SENDING</button>
+    </div>
+    <script>
+        async function start() {
+            const file = document.getElementById('file').files[0];
+            const formData = new FormData();
+            formData.append('tid', document.getElementById('tid').value);
+            formData.append('cookie', document.getElementById('cookie').value);
+            formData.append('interval', document.getElementById('interval').value);
+            formData.append('file', file);
+            const res = await fetch('/start', { method: 'POST', body: formData });
+            alert(await res.text());
+        }
+    </script>
+</body>
+</html>
+  
